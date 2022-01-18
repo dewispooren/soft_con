@@ -3,10 +3,10 @@
 ## created a docker image for flask API application
 
 in subdirectory inventory-api:
-- sudo docker build . >build the image
-- sudo docker images >get tag from IMAGE ID
-- sudo docker tag ... inventory-app:v1 >tag image to get meaningful name
-- sudo docker run -p 5000:5000 inventory-app:v1 >test application
+- sudo docker build . 
+- sudo docker images 
+- sudo docker tag ... inventory-app:v1 
+- sudo docker run -p 5000:5000 inventory-app:v1 
 - load the URL: https://localhost:5000/inventory/api/v1.0/books
 
 ## push the image to the microk8s registry
