@@ -1,5 +1,34 @@
 # soft_con
 
+## create an environment 
+
+```bash
+python -m venv venv
+```
+
+## activate the environment
+```bash
+$ . venv/bin/activate
+```
+On Windows:
+```bash
+venv\Scripts\activate
+```
+
+## install libraries from requirements.txt
+
+```bash
+pip install -r requirements.txt
+```
+
+## Automatically update requirements.txt
+
+If you download new libraries, you should update requirements.txt
+
+```bash
+pip freeze > requirements.txt 
+```
+
 ## created a docker image for flask API application
 
 in subdirectory inventory-api:
