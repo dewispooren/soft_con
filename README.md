@@ -1,7 +1,7 @@
 # soft_con
 
 ## create an environment 
-
+in subdirectory inventory-api:
 ```bash
 python -m venv venv
 ```
@@ -36,7 +36,7 @@ in subdirectory inventory-api:
 - sudo docker images 
 - sudo docker tag ... inventory-app:v1 
 - sudo docker run -p 5000:5000 inventory-app:v1 
-- load the URL: https://localhost:5000/inventory/api/v1.0/books
+- load the URL: http://localhost:5000/inventory/api/v1.0/book/
 
 ## push the image to the microk8s registry
 
