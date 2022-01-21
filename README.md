@@ -2,32 +2,32 @@
 
 ## create an environment 
 in subdirectory inventory-api:
-bash
+```bash
 python -m venv venv
-
+```
 
 ## activate the environment
-bash
+```bash
 $ . venv/bin/activate
-
+```
 On Windows:
-bash
+```bash
 venv\Scripts\activate
-
+```
 
 ## install libraries from requirements.txt
 
-bash
+```bash
 pip install -r requirements.txt
-
+```
 
 ## Automatically update requirements.txt
 
 If you download new libraries, you should update requirements.txt
 
-bash
+```bash
 pip freeze > requirements.txt 
-
+```
 
 ## created a docker image for flask API application
 
@@ -60,46 +60,105 @@ in main directory
 # Create persistent layer using PostgreSQL database
 
 ## create configuration file for storing PostgreSQL related information
-bash
+```bash
 kubectl apply -f postgres-config.yaml
-
+```
 ## Create a secret file to encode the password using base64 
-bash
+```bash
 kubectl apply -f postgres-secret.yaml
-
+```
 ## create storage file to save the data on a persistent storage
 make a directory
-bash
+```bash
 sudo mkdir -p /opt/postgre/data
-
-bash
+```
+```bash
 kubectl apply -f postgres-storage.yaml
-
+```
 ## create deployment file 
-bash
+```bash
 kubectl apply -f postgres-deployment.yaml
-
+```
 ## create service file to acces the deployment or container using CLusterIP
-bash
+```bash
 kubectl apply -f postgres-service.yaml
-
+```
 
 ## connect to PostgreSQL
 ensure that the Postgres client is installed
-bash
+```bash
 sudo apt install postgresql-client
-
+```
 connect to PostgreSQL from machine
-bash
+```bash
 psql -h localhost -U postgresadmin --password -p 30001 postgresdb
-
+```
 password is password from secret file (admin123)
 
 To show list of databases
-bash
+```bash
 \l
-
+```
 
 To show list of relations
-bash
+```bash
 \dt
+```
+
+# Sample API
+
+## Install packages 
+```bash
+sudo apt-get install pipenv
+```
+```bash
+sudo apt-get install libpq-dev python3-dev
+```
+
+## activate environment
+```bash
+pipenv shell
+```
+```bash
+pipenv install
+```
+
+## set environment variables
+```bash
+export FLASK_ENV=development
+```
+```bash
+export DATABASE_URL=postgres://postgresadmin:admin123@localhost:30001/postgresdb
+```
+
+## install postgres client
+```bash
+sudo apt install postgresql-client-common postgresql-client
+```
+## execute creation of the tables in database
+```bash
+mv migrations migrations.old
+```
+```bash
+python manage.py db init
+```
+```bash
+python manage.py db migrate
+```
+```bash
+python manage.py db upgrade
+```
+```bash
+psql -h localhost -U
+postgresadmin -p 30001 postgresdb
+```
+
+open browser on:
+http://0.0.0.0:5000/api/v1/users/
+
+## post request
+Download tool postman
+create a new collection and a new request
+select the method post and raw data of type JSON
+add new user
+
