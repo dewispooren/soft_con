@@ -13,3 +13,4 @@ python-coveralls
 gunicorn
 python-dotenv
 werkzeug==1.0.1
+slugify
