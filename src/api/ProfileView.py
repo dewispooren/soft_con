@@ -59,7 +59,7 @@ def get_me():
 
 @profile_api.route('/read-blogs', methods=['GET'])
 @Auth.auth_required
-def read_blos():
+def read_blogs():
   """
   Get me
   """
@@ -71,13 +71,13 @@ def read_blos():
 
 @profile_api.route('/saved-blogs', methods=['GET'])
 @Auth.auth_required
-def saved_blos():
+def saved_blogs():
   """
   Get me
   """
   saved_blog_schema = ListSavedBlogSchema()
   saved_blogs = BlogRead.read_blogs_by_user_id(g.user.get('id'))
-  ser_blogs = saved_blog_schema.dump(saved_blos)
+  ser_blogs = saved_blog_schema.dump(saved_blogs)
   return make_response(ser_blogs, 200)
 
 
