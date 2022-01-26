@@ -149,8 +149,7 @@ python manage.py db migrate
 python manage.py db upgrade
 ```
 ```bash
-psql -h localhost -U
-postgresadmin -p 30001 postgresdb
+psql -h localhost -U postgresadmin -p 30001 postgresdb
 ```
 
 open browser on:
