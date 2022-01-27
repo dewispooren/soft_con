@@ -53,7 +53,7 @@ in deployment file
 - kubectl apply -f softcon-deployment.yaml
 - kubectl get pods -l app=softcon
 
-## create a kubernetes service of type clusterIP for the Flask API
+## create a kubernetes service of type clusterIP 
 - kubectl apply -f inventory-api-service.yaml
 - kubectl get svc
 - load the url: http://"cluster-ip":8081/inventory/api/v1.0/books
