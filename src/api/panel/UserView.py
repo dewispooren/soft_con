@@ -1,14 +1,15 @@
 #/src/views/UserView
 
 from flask import request, Blueprint,  make_response
-from ..models.UserModel import UserModel, UserSchema
+from ...models.UserModel import UserModel, UserRoles, UserSchema, UserRoleSchema
 
-user_api = Blueprint('user_api', __name__)
+panel_user_api = Blueprint('panel_user_api', __name__)
 user_schema = UserSchema()
+user_role_schema = UserRoleSchema()
 
 
 
-@user_api.route('/', methods=['GET'])
+@panel_user_api.route('/', methods=['GET'])
 
 def get_all():
   """
@@ -19,7 +20,7 @@ def get_all():
   users_dict = {"users":ser_users}
   return make_response(users_dict)
 
-@user_api.route('/<int:user_id>', methods=['GET'])
+@panel_user_api.route('/<int:user_id>', methods=['GET'])
 def get_a_user(user_id):
   """
   Get a single user
@@ -31,7 +32,7 @@ def get_a_user(user_id):
   ser_user = user_schema.dump(user)
   return make_response(ser_user)
 
-@user_api.route('/<int:user_id>', methods=['PUT'])
+@panel_user_api.route('/<int:user_id>', methods=['PUT'])
 
 def update(user_id):
   """
@@ -45,7 +46,7 @@ def update(user_id):
   ser_user = user_schema.dump(user)
   return make_response(ser_user)
 
-@user_api.route('/<int:user_id>', methods=['DELETE'])
+@panel_user_api.route('/<int:user_id>', methods=['DELETE'])
 
 def delete(user_id):
   """
@@ -54,6 +55,20 @@ def delete(user_id):
   user = UserModel.get_one_user(user_id)
   user.delete()
   return make_response({'message': 'deleted'},200)
+  
+
+@panel_user_api.route('/add-role', methods=['POST'])
+
+def add_admin_role(user_id):
+  """
+  Update user
+  """
+  req_data = request.get_json()
+  data = user_role_schema.load(req_data)
+  user_role = UserRoles(data)
+  user_role.save()
+  ser_user_role = user_role_schema.dump(user_role)
+  return make_response(ser_user_role)
 
 
 

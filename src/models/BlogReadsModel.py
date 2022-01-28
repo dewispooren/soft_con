@@ -54,7 +54,7 @@ class BlogReadSchema(Schema):
 
 
 class ReadBlogsSchema(Schema):
-    blogs = fields.List(fields.Nested(ListBlogSchema))
+    blog = fields.Nested(ListBlogSchema)
 
 
 

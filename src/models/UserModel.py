@@ -92,3 +92,10 @@ class UserSchema(Schema):
   password = fields.Str(required=True, load_only=True)
 
 
+class UserRoleSchema(Schema):
+  id = fields.Int(dump_only=True)
+  user_id = fields.Int(required=False)
+  role_id = fields.Int(required=True)
+
+
+

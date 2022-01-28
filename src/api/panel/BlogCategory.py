@@ -1,5 +1,6 @@
 from flask import request, Blueprint,  make_response
 from ...models.BlogCategoryModel import BlogCategory, BlogCategorySchema, ListBlogCategorySchema
+from ...shared.Authentication import Auth
 
 panel_blog_category_api = Blueprint('panel_blog_category_api', __name__)
 blog_category_schema = BlogCategorySchema()
@@ -7,6 +8,7 @@ list_blog_category = ListBlogCategorySchema()
 
 
 @panel_blog_category_api.route('/', methods=['POST'])
+@Auth.admin_auth_required
 def create():
   """
   Create User Function
@@ -21,7 +23,7 @@ def create():
   return make_response(ser_data,200)
 
 @panel_blog_category_api.route('/', methods=['GET'])
-
+@Auth.admin_auth_required
 def get_all():
   """
   Get all users
@@ -33,6 +35,7 @@ def get_all():
 
 
 @panel_blog_category_api.route('/<int:id>', methods=['GET'])
+@Auth.admin_auth_required
 def get_by_id(id):
   """
   Get a single user
@@ -46,7 +49,7 @@ def get_by_id(id):
 
 
 @panel_blog_category_api.route('/<int:id>', methods=['PUT'])
-
+@Auth.admin_auth_required
 def update(id):
   """
   Update user
@@ -60,7 +63,7 @@ def update(id):
   return make_response(ser_blog_cateory)
 
 @panel_blog_category_api.route('/<int:id>', methods=['DELETE'])
-
+@Auth.admin_auth_required
 def delete(id):
   """
   Delete a user
@@ -71,7 +74,7 @@ def delete(id):
 
 
 @panel_blog_category_api.route('/switch-active/<int:id>', methods=['GET'])
-
+@Auth.admin_auth_required
 def switch_active(id):
   """
   Delete a user

@@ -45,4 +45,4 @@ class SavedBlogSchema(Schema):
 
 
 class ListSavedBlogSchema(Schema):
-    blogs = fields.List(fields.Nested(BlogSchema))
+    blog = fields.Nested(BlogSchema)

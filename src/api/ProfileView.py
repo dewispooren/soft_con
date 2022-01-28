@@ -64,9 +64,12 @@ def read_blogs():
   Get me
   """
   read_blog_schema = ReadBlogsSchema()
+  print(g.user.get('id'))
   read_blogs = BlogRead.read_blogs_by_user_id(g.user.get('id'))
-  ser_blogs = read_blog_schema.dump(read_blogs)
-  return make_response(ser_blogs, 200)
+  print(read_blogs)
+  ser_blogs = read_blog_schema.dump(read_blogs, many=True)
+  blogs_dict = {"blogs":ser_blogs}
+  return make_response(blogs_dict, 200)
 
 
 @profile_api.route('/saved-blogs', methods=['GET'])
@@ -76,9 +79,10 @@ def saved_blogs():
   Get me
   """
   saved_blog_schema = ListSavedBlogSchema()
-  saved_blogs = BlogRead.read_blogs_by_user_id(g.user.get('id'))
-  ser_blogs = saved_blog_schema.dump(saved_blogs)
-  return make_response(ser_blogs, 200)
+  saved_blogs = SavedBlog.saved_blogs_by_user_id(g.user.get('id'))
+  ser_blogs = saved_blog_schema.dump(saved_blogs, many=True)
+  blogs_dict = {"blogs":ser_blogs}
+  return make_response(blogs_dict, 200)
 
 
 
