@@ -1,4 +1,3 @@
-from attr import field, fields_dict
 from marshmallow import fields, Schema
 import datetime
 from .BlogCategoryModel import BlogCategory, ListBlogCategorySchema

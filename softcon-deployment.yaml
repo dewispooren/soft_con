@@ -1,0 +1,21 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: softcon-deployment 
+  labels: 
+    app: softcon
+spec: 
+  replicas: 3 
+  selector: 
+    matchLabels: 
+      app: softcon
+  template: 
+    metadata: 
+      labels: 
+        app: softcon 
+    spec: 
+      containers: 
+      - name: softcon11-container
+        image: localhost:32000/softcon11:v1 
+        ports: 
+        - containerPort: 5000 
