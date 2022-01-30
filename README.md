@@ -124,10 +124,13 @@ add new user
 ## rebuild image after changing a file
 get container id
 ```bash
-docker ps -a
+sudo docker ps -a
 ```
 ```bash
-docker rm -f <container_id>
+sudo docker rm -f <container_id>
+```
+```bash
+sudo docker rmi softcon:v1
 ```
 check if image is deleted
 ```bash
