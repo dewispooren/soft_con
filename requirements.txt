@@ -1,4 +1,4 @@
-flask==1.1.4
+flask==1.1.2
 flask-sqlalchemy
 psycopg2
 flask-migrate==2.5.3
