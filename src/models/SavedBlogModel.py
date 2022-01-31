@@ -37,6 +37,11 @@ class SavedBlog(db.Model):
     @staticmethod
     def saved_blogs_by_user_id(user_id):
         return SavedBlog.query.filter(SavedBlog.user_id == user_id).all()
+    
+    @staticmethod
+    def saved_blogs_ids_by_user_id(user_id):
+        blog_ids_values = SavedBlog.query.filter(SavedBlog.user_id == user_id).with_entities(SavedBlog.blog_id).all()
+        return [value for (value,) in blog_ids_values]
 
 
 class SavedBlogSchema(Schema):
@@ -45,4 +50,4 @@ class SavedBlogSchema(Schema):
 
 
 class ListSavedBlogSchema(Schema):
-    blog = fields.Nested(BlogSchema)
+    blog = fields.Nested(ListBlogSchema)

@@ -1,6 +1,8 @@
 # src/models/UserModel.py
 from marshmallow import fields, Schema
 import datetime
+
+from sqlalchemy import true
 from . import db, bcrypt
 
 class UserModel(db.Model):
@@ -85,17 +87,21 @@ class UserRoles(db.Model):
         'roles.id', ondelete='CASCADE'))
 
 
-class UserSchema(Schema):
-  id = fields.Int(dump_only=True)
-  name = fields.Str(required=False)
-  email = fields.Email(required=True)
-  password = fields.Str(required=True, load_only=True)
-
 
 class UserRoleSchema(Schema):
   id = fields.Int(dump_only=True)
   user_id = fields.Int(required=False)
   role_id = fields.Int(required=True)
+
+
+
+class UserSchema(Schema):
+  id = fields.Int(dump_only=True)
+  name = fields.Str(required=False)
+  email = fields.Email(required=True)
+  password = fields.Str(required=True, load_only=True)
+  roles = fields.List(fields.Nested(UserRoleSchema), dump_only=True)
+
 
 
 

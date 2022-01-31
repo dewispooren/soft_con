@@ -147,14 +147,24 @@ class ListBlogSchema(Schema):
     category = fields.Nested(ListBlogCategorySchema)
     slug = fields.Str(required=True)
     title = fields.Str(required=True)
-    short_text = fields.Str(required=True, load_only=True)
-    publisher = fields.Str(required=True, load_only=True)
+    short_text = fields.Str(required=True, dump_only=True)
+    publisher = fields.Str(required=True, dump_only=True)
     featured_photo = fields.Str(dump_only=True)
     read_time = fields.Str(dump_only=True)
     published_date = fields.DateTime(dump_only=True)
     comment_count = fields.Int(dump_only=True)
     read_count = fields.Int(dump_only=True)
     saved_count = fields.Int(dump_only=True)
+
+class PanelListBlogSchema(Schema):
+    id = fields.Int(dump_only=True)
+    category = fields.Nested(ListBlogCategorySchema)
+    slug = fields.Str(required=True)
+    title = fields.Str(required=True)
+    is_published = fields.Bool()
+    is_featured = fields.Bool()
+ 
+
 
 
 

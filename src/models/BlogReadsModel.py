@@ -46,6 +46,11 @@ class BlogRead(db.Model):
     @staticmethod
     def read_blogs_by_user_id(user_id):
         return BlogRead.query.filter(BlogRead.user_id == user_id).all()
+    
+    @staticmethod
+    def read_blogs_ids_by_user_id(user_id):
+        blog_ids_values = BlogRead.query.filter(BlogRead.user_id == user_id).with_entities(BlogRead.blog_id).all()
+        return [value for (value,) in blog_ids_values]
 
 
 class BlogReadSchema(Schema):

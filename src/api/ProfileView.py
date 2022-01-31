@@ -14,7 +14,6 @@ def create():
   """
   req_data = request.get_json()
   data = user_schema.load(req_data)
-  
   # check if user already exist in the db
   user_in_db = UserModel.get_user_by_email(data.get('email'))
   if user_in_db:
@@ -54,7 +53,10 @@ def get_me():
   """
   user = UserModel.get_one_user(g.user.get('id'))
   ser_user = user_schema.dump(user)
-  return make_response(ser_user, 200)
+  read_blogs_ids = BlogRead.read_blogs_ids_by_user_id(g.user.get('id'))
+  saved_blogs_ids = SavedBlog.saved_blogs_ids_by_user_id(g.user.get('id'))
+  response_dict = {"user":ser_user , "read_blogs_ids":read_blogs_ids, "saved_blogs_ids":saved_blogs_ids }
+  return make_response(response_dict, 200)
 
 
 @profile_api.route('/read-blogs', methods=['GET'])

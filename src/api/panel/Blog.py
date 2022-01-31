@@ -1,10 +1,10 @@
 from flask import request, Blueprint,  make_response
-from ...models.BlogModel import Blog, BlogSchema
+from ...models.BlogModel import Blog, BlogSchema, PanelListBlogSchema
 from ...shared.Authentication import Auth
 
 panel_blog_api = Blueprint('panel_blog_api', __name__)
 blog_schema = BlogSchema()
-
+list_blog_schema = PanelListBlogSchema()
 
 
 @panel_blog_api.route('/', methods=['POST'])
@@ -15,6 +15,7 @@ def create():
   """
   req_data = request.get_json()
   data = blog_schema.load(req_data)
+  print(data)
   blog = Blog(data)
   blog.save()
   ser_data = blog_schema.dump(blog)
@@ -29,7 +30,7 @@ def get_all():
   Get all users
   """
   blogs = Blog.get_all_blog()
-  ser_blogs = blog_schema.dump(blogs, many=True)
+  ser_blogs = list_blog_schema.dump(blogs, many=True)
   blogs_dict = {"blogs":ser_blogs}
   return make_response(blogs_dict)
 
