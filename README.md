@@ -97,21 +97,23 @@ password is admin123
 
 ## push the image to the microk8s registry
 
-- sudo docker tag image_id localhost:32000/image_id:v1
+- sudo docker tag image_id localhost:32000/softcon:v1
 - microk8s start
 - microk8s enable registry
-- sudo docker push localhost:32000/inventory-api:v1
+- sudo docker push localhost:32000/softcon:v1
 
 ## create a Kubernetes deployment 
 
 in deployment file
-- make sure that the image is the same as the image you just created (localhost:32000/image_id:v1)
+- make sure that the image is the same as the image you just created (localhost:32000/softcon:v1)
 
 - kubectl apply -f softcon-deployment.yaml
 - kubectl get pods -l app=softcon
 
-## create a kubernetes service of type clusterIP 
-- kubectl apply -f inventory-api-service.yaml
+## create kubernetes services
+- kubectl apply -f softcon-service.yaml
+- kubectl apply -f softcon-loadbalance-service.yaml
+- kubectl apply -f softcon-nodeport-service.yaml
 - kubectl get svc
 - load the url: http://"cluster-ip":8081/inventory/api/v1/blog
 
@@ -136,4 +138,5 @@ check if image is deleted
 ```bash
 sudo docker images
 ```
+also delete the image you created for the microk8s registry
 and then you can build again
