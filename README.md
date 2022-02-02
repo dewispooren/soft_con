@@ -87,17 +87,17 @@ psql -h 10.152.183.122 -U postgresadmin -p 5432 postgresdb
 ```
 password is admin123
 
-## create a docker image 
+## when you deleted previously created images(below) create a docker image 
 
 - sudo docker build . 
 - sudo docker images 
-- sudo docker tag image_id new_image_id 
-- sudo docker run -p 5000:5000 new_image_id 
+- sudo docker tag image_id softcon:v1 
+- sudo docker run -p 5000:5000 softcon:v1
 - load the URL: http://0.0.0.0:5000/api/v1/blog
 
 ## push the image to the microk8s registry
 
-- sudo docker tag image_id localhost:32000/softcon:v1
+- sudo docker tag softcon:v1 localhost:32000/softcon:v1
 - microk8s start
 - microk8s enable registry
 - sudo docker push localhost:32000/softcon:v1
