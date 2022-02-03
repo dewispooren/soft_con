@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+kind: NetworkPolicy 
+apiVersion: networking.k8s.io/v1 
+metadata: 
+  name: allow-internet-only 
+spec: 
+  podSelector: {} 
+  policyTypes: 
+  - Egress 
+  egress: 
+  - to: 
+    - ipBlock: 
+        cidr: 0.0.0.0/0 
+        except: 
+        - 10.116.0.0/14 
+        - 10.120.0.0/20 
