@@ -9,5 +9,5 @@ spec:
     - protocol: TCP
       port: 8081
       targetPort: 5000
-  clusterIP: 10.152.183.31
+  clusterIP: 10.152.183.3
   type: LoadBalancer

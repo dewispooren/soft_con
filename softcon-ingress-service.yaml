@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-service
@@ -12,3 +12,9 @@ metadata:
       add_header Access-Control-Allow-Credentials true;
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+spec:
+  defaultBackend:
+    service:
+      name: softcon
+      port:
+        number: 8081
