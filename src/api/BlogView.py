@@ -79,7 +79,7 @@ def read_blog(blog_id):
 @blog_api.route('/save/<blog_id>', methods=['GET'])
 @cross_origin()
 @Auth.auth_required
-def save_blog(blog_id)
+def save_blog(blog_id):
   saved_blog_schema = SavedBlogSchema()
   user_id = g.user.get('id')
   req_data = {"blog_id":blog_id, "user_id":user_id}
