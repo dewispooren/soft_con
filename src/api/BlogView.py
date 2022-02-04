@@ -1,4 +1,5 @@
 from flask import request, g, Blueprint,  make_response
+from flask_cors import cross_origin
 from ..models.BlogModel import Blog, BlogDetailSchema, ListBlogSchema
 from ..models.BlogReadsModel import BlogRead, BlogReadSchema
 from ..models.SavedBlogModel import SavedBlog, SavedBlogSchema
@@ -11,6 +12,7 @@ list_blog_schema = ListBlogSchema()
 
 
 @blog_api.route('/', methods=['GET'])
+@cross_origin()
 def get_published_blogs():
   """
   Get all users
@@ -22,6 +24,7 @@ def get_published_blogs():
 
 
 @blog_api.route('/cat/<id>', methods=['GET'])
+@cross_origin()
 def get_blogs_by_category(id):
   """
   Get all users
@@ -33,6 +36,7 @@ def get_blogs_by_category(id):
 
 
 @blog_api.route('/search/<search_term>', methods=['GET'])
+@cross_origin()
 def get_blogs_by_search(search_term):
   """
   Get all users
@@ -44,6 +48,7 @@ def get_blogs_by_search(search_term):
 
 
 @blog_api.route('/featured/', methods=['GET'])
+@cross_origin()
 def get_featured_blogs():
   """
   Get all users
@@ -56,6 +61,7 @@ def get_featured_blogs():
 
 
 @blog_api.route('/s/<slug>', methods=['GET'])
+@cross_origin()
 def get_by_slug(slug):
   """
   Get a single user
@@ -71,6 +77,7 @@ def get_by_slug(slug):
 
 
 @blog_api.route('/read/<blog_id>', methods=['GET'])
+@cross_origin()
 @Auth.auth_required
 def read_blog(blog_id):
   """
@@ -88,6 +95,7 @@ def read_blog(blog_id):
 
 
 @blog_api.route('/save/<blog_id>', methods=['GET'])
+@cross_origin()
 @Auth.auth_required
 def save_blog(blog_id):
   """

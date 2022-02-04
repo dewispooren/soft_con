@@ -1,4 +1,5 @@
 from flask import request, json, Response, Blueprint, g, make_response
+from flask_cors import cross_origin
 from ..models.UserModel import UserModel, UserSchema
 from ..models.BlogReadsModel import BlogRead, ReadBlogsSchema
 from ..models.SavedBlogModel import SavedBlog, ListSavedBlogSchema
@@ -8,6 +9,7 @@ profile_api = Blueprint('profile_api', __name__)
 user_schema = UserSchema()
 
 @profile_api.route('/', methods=['POST'])
+@cross_origin()
 def create():
   """
   Create User Function
@@ -29,6 +31,7 @@ def create():
 
 
 @profile_api.route('/', methods=['PUT'])
+@cross_origin()
 @Auth.auth_required
 def update():
   """
@@ -46,6 +49,7 @@ def update():
 
 
 @profile_api.route('/', methods=['GET'])
+@cross_origin()
 @Auth.auth_required
 def get_me():
   """
@@ -60,6 +64,7 @@ def get_me():
 
 
 @profile_api.route('/read-blogs', methods=['GET'])
+@cross_origin()
 @Auth.auth_required
 def read_blogs():
   """
@@ -75,6 +80,7 @@ def read_blogs():
 
 
 @profile_api.route('/saved-blogs', methods=['GET'])
+@cross_origin()
 @Auth.auth_required
 def saved_blogs():
   """
@@ -89,6 +95,7 @@ def saved_blogs():
 
 
 @profile_api.route('/login', methods=['POST'])
+@cross_origin()
 def login():
   """
   User Login Function
@@ -110,6 +117,7 @@ def login():
 
 
 @profile_api.route('/register', methods=['POST'])
+@cross_origin()
 def register():
   """
   User Register Function

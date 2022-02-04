@@ -1,5 +1,6 @@
 
 from flask import Blueprint,  make_response
+from flask_cors import cross_origin
 from ..models.BlogCategoryModel import BlogCategory, BlogCategorySchema, ListBlogCategorySchema
 
 blog_category_api = Blueprint('blog_category_api', __name__)
@@ -8,6 +9,7 @@ list_blog_category = ListBlogCategorySchema()
 
 
 @blog_category_api.route('/', methods=['GET'])
+@cross_origin()
 def get_active_blog_categories():
   """
   Get all users
@@ -20,6 +22,7 @@ def get_active_blog_categories():
 
 
 @blog_category_api.route('/<slug>', methods=['GET'])
+@cross_origin()
 def get_by_slug(slug):
   """
   Get a single user

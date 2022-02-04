@@ -1,4 +1,5 @@
 from flask import request, Blueprint,  make_response
+from flask_cors import cross_origin
 from ...models.BlogCategoryModel import BlogCategory, BlogCategorySchema, ListBlogCategorySchema
 from ...shared.Authentication import Auth
 
@@ -8,6 +9,7 @@ list_blog_category = ListBlogCategorySchema()
 
 
 @panel_blog_category_api.route('/', methods=['POST'])
+@cross_origin()
 @Auth.admin_auth_required
 def create():
   """
@@ -23,6 +25,7 @@ def create():
   return make_response(ser_data,200)
 
 @panel_blog_category_api.route('/', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def get_all():
   """
@@ -35,6 +38,7 @@ def get_all():
 
 
 @panel_blog_category_api.route('/<int:id>', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def get_by_id(id):
   """
@@ -49,6 +53,7 @@ def get_by_id(id):
 
 
 @panel_blog_category_api.route('/<int:id>', methods=['PUT'])
+@cross_origin()
 @Auth.admin_auth_required
 def update(id):
   """
@@ -63,6 +68,7 @@ def update(id):
   return make_response(ser_blog_cateory)
 
 @panel_blog_category_api.route('/<int:id>', methods=['DELETE'])
+@cross_origin()
 @Auth.admin_auth_required
 def delete(id):
   """
@@ -74,6 +80,7 @@ def delete(id):
 
 
 @panel_blog_category_api.route('/switch-active/<int:id>', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def switch_active(id):
   """

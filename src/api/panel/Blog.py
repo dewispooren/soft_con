@@ -1,4 +1,5 @@
 from flask import request, Blueprint,  make_response
+from flask_cors import cross_origin
 from ...models.BlogModel import Blog, BlogSchema, PanelListBlogSchema
 from ...shared.Authentication import Auth
 
@@ -8,6 +9,7 @@ list_blog_schema = PanelListBlogSchema()
 
 
 @panel_blog_api.route('/', methods=['POST'])
+@cross_origin()
 @Auth.admin_auth_required
 def create():
   """
@@ -24,6 +26,7 @@ def create():
   return make_response(ser_data,200)
 
 @panel_blog_api.route('/', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def get_all():
   """
@@ -36,6 +39,7 @@ def get_all():
 
 
 @panel_blog_api.route('/<int:id>', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def get_by_id(id):
   """
@@ -50,6 +54,7 @@ def get_by_id(id):
 
 
 @panel_blog_api.route('/<int:id>', methods=['PUT'])
+@cross_origin()
 @Auth.admin_auth_required
 def update(id):
   """
@@ -64,6 +69,7 @@ def update(id):
   return make_response(ser_blog)
 
 @panel_blog_api.route('/<int:id>', methods=['DELETE'])
+@cross_origin()
 @Auth.admin_auth_required
 def delete(id):
   """
@@ -75,6 +81,7 @@ def delete(id):
 
 
 @panel_blog_api.route('/switch-publish/<int:id>', methods=['GET'])
+@cross_origin()
 @Auth.admin_auth_required
 def switch_publish(id):
   """

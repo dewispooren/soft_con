@@ -42,6 +42,7 @@ def create_app():
   app.register_blueprint(panel_blog_category_blueprint, url_prefix='/panel/api/v1/blog-category')
 
   @app.route('/', methods=['GET'])
+  @cross_origin()
   def index():
     """
     example endpoint
