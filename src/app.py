@@ -1,7 +1,7 @@
 #src/app.py
-
+import flask
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 from .config import app_config
 from .models import db, bcrypt
@@ -26,7 +26,7 @@ def create_app():
   app = Flask(__name__)
 
   app.config.from_object(app_config["development"])
-  CORS(app, resources=r'/api/*')
+  CORS(app)
 
   # initializing bcrypt and db
   bcrypt.init_app(app)
