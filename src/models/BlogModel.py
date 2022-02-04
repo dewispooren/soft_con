@@ -67,8 +67,8 @@ class Blog(db.Model):
     def switch_publish(id):
         blog = Blog.query.get(id)
         blog.is_published = not blog.is_published
-        if not blog.is_published is True:
-            blog.published_date = datetime.utcnow()
+        if blog.is_published is True:
+            blog.published_date = datetime.datetime.utcnow()
         db.session.commit()
     
     @staticmethod

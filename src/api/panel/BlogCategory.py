@@ -12,9 +12,6 @@ list_blog_category = ListBlogCategorySchema()
 @cross_origin()
 @Auth.admin_auth_required
 def create():
-  """
-  Create User Function
-  """
   req_data = request.get_json()
   data = blog_category_schema.load(req_data)
   blog_category = BlogCategory(data)
@@ -28,9 +25,6 @@ def create():
 @cross_origin()
 @Auth.admin_auth_required
 def get_all():
-  """
-  Get all users
-  """
   blog_categories = BlogCategory.get_all_blog_categories()
   ser_blog_categories = list_blog_category.dump(blog_categories, many=True)
   blog_categories_dict = {"blog_categories":ser_blog_categories}
@@ -41,9 +35,6 @@ def get_all():
 @cross_origin()
 @Auth.admin_auth_required
 def get_by_id(id):
-  """
-  Get a single user
-  """
   blog_category = BlogCategory.get_blog_category_by_id(id)
   if not blog_category:
     return make_response({'error': 'Blog category not found'}, 404)
@@ -56,9 +47,6 @@ def get_by_id(id):
 @cross_origin()
 @Auth.admin_auth_required
 def update(id):
-  """
-  Update user
-  """
   req_data = request.get_json()
   data = blog_category_schema.load(req_data, partial=True)
 
@@ -71,9 +59,6 @@ def update(id):
 @cross_origin()
 @Auth.admin_auth_required
 def delete(id):
-  """
-  Delete a user
-  """
   blog_category = BlogCategory.get_blog_category_by_id(id)
   blog_category.delete()
   return make_response({'message': 'deleted'},200)
@@ -83,8 +68,5 @@ def delete(id):
 @cross_origin()
 @Auth.admin_auth_required
 def switch_active(id):
-  """
-  Delete a user
-  """
   blog_category = BlogCategory.switch_active(id)
   return make_response({'message': 'success'},200)
