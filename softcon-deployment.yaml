@@ -14,20 +14,8 @@ spec:
       labels: 
         app: softcon 
     spec: 
-      volumes:
-      - name: secret-volume
-        secret:
-          secretName: nginxsecret
-      - name: configmap-volume
-        configMap:
-          name: nginxconfigmap
       containers: 
       - name: softcon-container
         image: localhost:32000/softcon4:v1 
         ports: 
         - containerPort: 5000 
-        volumeMounts:
-        - mountPath: /etc/nginx/ssl
-          name: secret-volume
-        - mountPath: /etc/nginx/conf.d
-          name: configmap-volume
