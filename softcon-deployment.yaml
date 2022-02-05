@@ -16,6 +16,6 @@ spec:
     spec: 
       containers: 
       - name: softcon-container
-        image: localhost:32000/softcon4:v1 
+        image: localhost:32000/softcon2:v1 
         ports: 
         - containerPort: 5000 

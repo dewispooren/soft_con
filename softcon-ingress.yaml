@@ -4,7 +4,7 @@ metadata:
   name: softcon-ingress
 spec:
   rules:
-    - host: softcon.com
+    - host: soft-con.com
       http:
         paths:
           - path: /

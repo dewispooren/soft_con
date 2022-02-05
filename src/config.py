@@ -12,7 +12,7 @@ class Development(object):
     DEBUG = True
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:123qwe@localhost:5433/softcon"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgresadmin:admin123@10.152.183.241:5432/postgresdb"
     JWT_SECRET_KEY = 'gxARdhXpn2R4mN7QzSOWe18X3kW66k'
     
 
