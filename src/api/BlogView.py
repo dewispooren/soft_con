@@ -14,9 +14,6 @@ list_blog_schema = ListBlogSchema()
 @blog_api.route('/', methods=['GET'])
 @cross_origin()
 def get_published_blogs():
-  """
-  Get all users
-  """
   blogs = Blog.get_published_blogs()
   ser_blogs = list_blog_schema.dump(blogs, many=True)
   blogs_dict = {"blogs":ser_blogs}
@@ -26,9 +23,6 @@ def get_published_blogs():
 @blog_api.route('/cat/<id>', methods=['GET'])
 @cross_origin()
 def get_blogs_by_category(id):
-  """
-  Get all users
-  """
   blogs = Blog.get_published_blogs_by_category(id)
   ser_blogs = list_blog_schema.dump(blogs, many=True)
   blogs_dict = {"blogs":ser_blogs}
@@ -38,9 +32,6 @@ def get_blogs_by_category(id):
 @blog_api.route('/search/<search_term>', methods=['GET'])
 @cross_origin()
 def get_blogs_by_search(search_term):
-  """
-  Get all users
-  """
   blogs = Blog.get_blogs_by_search_term(search_term)
   ser_blogs = list_blog_schema.dump(blogs, many=True)
   blogs_dict = {"blogs":ser_blogs}
@@ -50,9 +41,6 @@ def get_blogs_by_search(search_term):
 @blog_api.route('/featured/', methods=['GET'])
 @cross_origin()
 def get_featured_blogs():
-  """
-  Get all users
-  """
   blogs = Blog.get_featured_blogs()
   ser_blogs = list_blog_schema.dump(blogs, many=True)
   blogs_dict = {"blogs":ser_blogs}
@@ -63,9 +51,6 @@ def get_featured_blogs():
 @blog_api.route('/s/<slug>', methods=['GET'])
 @cross_origin()
 def get_by_slug(slug):
-  """
-  Get a single user
-  """
   blog = Blog.get_blog_by_slug(slug)
   if not blog:
     return make_response({'error': 'Blog not found'}, 404)
@@ -80,9 +65,6 @@ def get_by_slug(slug):
 @cross_origin()
 @Auth.auth_required
 def read_blog(blog_id):
-  """
-  Get a single user
-  """
   blog_read_schema = BlogReadSchema()
   user_id = g.user.get('id')
   req_data = {"blog_id":blog_id, "user_id":user_id}
@@ -98,9 +80,6 @@ def read_blog(blog_id):
 @cross_origin()
 @Auth.auth_required
 def save_blog(blog_id):
-  """
-  Get a single user
-  """
   saved_blog_schema = SavedBlogSchema()
   user_id = g.user.get('id')
   req_data = {"blog_id":blog_id, "user_id":user_id}

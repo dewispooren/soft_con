@@ -12,7 +12,7 @@ class Development(object):
     DEBUG = True
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgresadmin:admin123@10.152.183.122:5432/postgresdb"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:123qwe@localhost:5433/softcon"
     JWT_SECRET_KEY = 'gxARdhXpn2R4mN7QzSOWe18X3kW66k'
     
 
@@ -23,7 +23,7 @@ class Production(object):
     DEBUG = False
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS=False
-    SQLALCHEMY_DATABASE_URI ="postgresql://postgresadmin:admin123@10.152.183.122:5432/postgresdb"
+    SQLALCHEMY_DATABASE_URI ="postgresql://postgres:123qwe@localhost:5433/softcon"
     JWT_SECRET_KEY = 'gxARdhXpn2R4mN7QzSOWe18X3kW66k'
 
 class Testing(object):
@@ -32,7 +32,7 @@ class Testing(object):
     """
     TESTING = True
     JWT_SECRET_KEY = 'gxARdhXpn2R4mN7QzSOWe18X3kW66k'
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgresadmin:admin123@10.152.183.122:5432/postgresdb"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:123qwe@localhost:5433/softcon"
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 app_config = {

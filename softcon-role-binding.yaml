@@ -5,13 +5,7 @@ metadata:
   namespace: default
 subjects:
 - kind: User
-  name: aysenurseref
-  apiGroup: rbac.authorization.k8s.io
-- kind: User
-  name: dewispooren
-  apiGroup: rbac.authorization.k8s.io
-- kind: User
-  name: ninagroot
+  name: dewi
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   # "roleRef" specifies the binding to a Role / ClusterRole
