@@ -138,5 +138,7 @@ check if image is deleted
 ```bash
 sudo docker images
 ```
-also delete the image you created for the microk8s registry
-and then you can build again
+delete the image you created for the microk8s registry
+```bash
+sudo microk8s ctr images remove localhost:32000/softcon:v1
+```
