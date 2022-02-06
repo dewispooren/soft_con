@@ -1,20 +1,20 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: softcon-deployment 
+  name: softcon-deployment-canary
   labels: 
     app: softcon
 spec: 
-  replicas: 3
+  replicas: 1
   selector: 
     matchLabels: 
       app: softcon
-      version: v1.0.0
+      version: v2.0.0
   template: 
     metadata: 
       labels: 
         app: softcon 
-        version: v1.0.0
+        version: v2.0.0
     spec: 
       containers: 
       - name: softcon-container
@@ -23,4 +23,4 @@ spec:
         - containerPort: 5000
         env:
         - name: Version
-          value: v1.0.0 
+          value: v2.0.0 

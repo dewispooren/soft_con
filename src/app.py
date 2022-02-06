@@ -47,7 +47,7 @@ def create_app():
     """
     example endpoint
     """
-    return 'Congratulations! Your part 2 endpoint is working'
+    return 'Updated application: Congratulations! Your part 2 endpoint is working'
 
   return app
 
