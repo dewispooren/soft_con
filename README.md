@@ -67,7 +67,7 @@ Go to file config.py in src folder.
 change the cluster-IP in SQLALCHEMY_DATABASE_URI into the right cluster-IP
 
 
-## create the tables in database
+## if you change anything about the tables in database
 first delete migrations folder
 
 ```bash
@@ -87,7 +87,7 @@ psql -h 10.152.183.122 -U postgresadmin -p 5432 postgresdb
 ```
 password is admin123
 
-## when you deleted previously created images(below) create a docker image 
+## when you deleted previously created images(below) create a docker image of back-end
 
 - sudo docker build . 
 - sudo docker images 
@@ -98,8 +98,7 @@ password is admin123
 ## push the image to the microk8s registry
 
 - sudo docker tag softcon:v1 localhost:32000/softcon:v1
-- microk8s start
-- microk8s enable registry
+- microk8s status
 - sudo docker push localhost:32000/softcon:v1
 
 ## create a Kubernetes deployment 
@@ -117,13 +116,23 @@ in deployment file
 - kubectl get svc
 - load the url: http://"cluster-ip":8081/inventory/api/v1/blog
 
-## post request
-Download tool postman
-create a new collection and a new request
-select the method post and raw data of type JSON
-add new user
+## create image of front-end and push to registry & apply yaml files
 
+- sudo docker build . 
+- sudo docker images 
+- sudo docker tag image_id softcon-ui:v1 
+- sudo docker run -p 3000:3000 softcon-ui:v1
+- load the URL: http://0.0.0.0:3000/api/v1/blog
+- sudo docker tag softcon-ui:v1 localhost:32000/softcon-ui:v1
+- microk8s status
+- sudo docker push localhost:32000/softcon-ui:v1
+- kubectl apply -f ui-deployment.yaml
+- kubectl apply -f ui-loadbalance-service.yaml
+- kubectl apply -f ui-nodeport-service.yaml 
+- load the url <service-IP>:80
+  
 ## rebuild image after changing a file
+ 
 get container id
 ```bash
 sudo docker ps -a
@@ -133,6 +142,15 @@ sudo docker rm -f <container_id>
 ```
 ```bash
 sudo docker rmi softcon:v1
+```
+```bash
+sudo docker rmi localhost:32000/softcon:v1
+```
+```bash
+sudo docker rmi softcon-ui:v1
+```
+```bash
+sudo docker rmi localhost:32000/softcon-ui:v1
 ```
 check if image is deleted
 ```bash
@@ -146,4 +164,7 @@ sudo microk8s ctr images ls | grep localhost
 delete the image you created for the microk8s registry
 ```bash
 sudo microk8s ctr images remove localhost:32000/softcon:v1
+```
+```bash
+sudo microk8s ctr images remove localhost:32000/softcon-ui:v1
 ```
