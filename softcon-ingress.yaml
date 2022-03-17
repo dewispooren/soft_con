@@ -11,5 +11,8 @@ spec:
         number: 8081
   rules:
     - host: softcon.com
+  tls: 
+    - hosts: mydomain.com
+      secretName: my-tls-secret
    
      
