@@ -4,15 +4,25 @@ metadata:
   name: softcon-ingress
   namespace: default
 spec:
-  defaultBackend:
-    service:
-      name: softcon
-      port:
-        number: 8081
   rules:
     - host: softcon.com
-  tls: 
-    - hosts: mydomain.com
-      secretName: my-tls-secret
-   
-     
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: softcon-nodeport-service
+                port:
+                  number: 8081 
+  tls:
+    - hosts:
+        - softcon.com
+      secretName: my-tls-secret 
+
+
+
+
+
+
+
