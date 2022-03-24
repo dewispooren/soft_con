@@ -8,5 +8,6 @@ spec:
   ports:
     - port: 8081
       targetPort: 5000
+      name: https
   clusterIP: 10.152.183.3
   type: LoadBalancer
