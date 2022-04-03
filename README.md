@@ -114,7 +114,13 @@ in deployment file
 - kubectl apply -f softcon-loadbalance-service.yaml
 - kubectl apply -f softcon-nodeport-service.yaml
 - kubectl get svc
-- load the url: http://"cluster-ip":8081/inventory/api/v1/blog
+- load the url: http://"cluster-ip":8081/api/v1/blog
+
+## create kubernetes tls secret to use in ingress
+- sh tls_create
+- kubectl create secret tls tls-secret \
+    --cert=softcon-app.com.crt\
+    --key=softcon-app.com.key
 
 ## create image of front-end and push to registry & apply yaml files
 
@@ -122,7 +128,7 @@ in deployment file
 - sudo docker images 
 - sudo docker tag image_id softcon-ui:v1 
 - sudo docker run -p 3000:3000 softcon-ui:v1
-- load the URL: http://0.0.0.0:3000/api/v1/blog
+- load the URL: http://0.0.0.0:3000/
 - sudo docker tag softcon-ui:v1 localhost:32000/softcon-ui:v1
 - microk8s status
 - sudo docker push localhost:32000/softcon-ui:v1
